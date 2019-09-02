@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PersonCard from "./PersonCard";
 import axios from "axios";
+import styled from "styled-components";
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: space-between;
+`;
 
 const Cards = () => {
   const [data, setData] = useState([]);
@@ -18,7 +26,7 @@ const Cards = () => {
   }, []);
 
   return (
-    <div>
+    <FlexContainer>
       {data.map(person => {
         let homeworld;
         if (person.homeworld === "https://swapi.co/api/planets/1/") {
@@ -44,7 +52,7 @@ const Cards = () => {
           />
         );
       })}
-    </div>
+    </FlexContainer>
   );
 };
 
