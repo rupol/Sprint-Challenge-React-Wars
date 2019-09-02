@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PersonCard from "./PersonCard";
 import axios from "axios";
 
-const Cards = props => {
+const Cards = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,29 @@ const Cards = props => {
   return (
     <div>
       {data.map(person => {
-        return <PersonCard key={person.name} name={person.name} />;
+        let homeworld;
+        if (person.homeworld === "https://swapi.co/api/planets/1/") {
+          homeworld = "Tatooine";
+        } else if (person.homeworld === "https://swapi.co/api/planets/2/") {
+          homeworld = "Alderaan";
+        } else if (person.homeworld === "https://swapi.co/api/planets/8/") {
+          homeworld = "Naboo";
+        } else if (person.homeworld === "https://swapi.co/api/planets/20/") {
+          homeworld = "Stewjon";
+        }
+
+        return (
+          <PersonCard
+            key={person.name}
+            name={person.name}
+            birth_year={person.birth_year}
+            homeworld={homeworld}
+            gender={person.gender}
+            hair_color={person.hair_color}
+            height={person.height}
+            mass={person.mass}
+          />
+        );
       })}
     </div>
   );
