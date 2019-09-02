@@ -5,9 +5,16 @@ import styled from "styled-components";
 const CardContainer = styled.div`
   background: white;
   opacity: 0.7;
-  margin: 10px;
+  margin: 30px 10px;
   padding: 5px;
   width: 450px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 8px #000000;
+  transition: all 0.5s;
+  &:hover {
+    transform: translateY(-1rem) scale(1.03);
+    box-shadow: 6px 6px 20px #000000;
+  }
 `;
 
 const Name = styled.h2`
