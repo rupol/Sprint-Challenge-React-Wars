@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import PersonCard from "./PersonCard";
 import axios from "axios";
 import styled from "styled-components";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const FlexContainer = styled.div`
   display: flex;
@@ -28,7 +30,7 @@ const Cards = props => {
     axios
       .get(`https://swapi.co/api/people/?page=${page}`)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data.results);
       })
       .catch(error => {
@@ -36,18 +38,36 @@ const Cards = props => {
       });
   }, [page]);
 
-  const nextPage = page => {
+  const nextPage = () => {
     setPage(page => page + 1);
-    console.log(page);
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
   };
 
-  const previousPage = page => {
+  const previousPage = () => {
     setPage(page => page - 1);
-    console.log(page);
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
   };
+
+  if (!data) {
+    return (
+      <FlexContainer>
+        <Loader type="Ball-Triangle" color="#fff" height={375} width={375} />
+      </FlexContainer>
+    );
+  }
 
   return (
     <>
+      <Button onClick={previousPage}>Previous</Button>
+      <Button onClick={nextPage}>Next</Button>
       <FlexContainer>
         {data.map(person => {
           let homeworld;
